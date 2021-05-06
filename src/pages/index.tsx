@@ -15,7 +15,6 @@ type Episode = {
   id: string;
   title: string;
   thumbnail: string;
-  description: string;
   members: string;
   duration: number;
   durationAsString: string;
@@ -81,7 +80,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
             {allEpisodes.map((episode) => {
               return (
                 <tr key={episode.id}>
-                  <td>
+                  <td style={{ width: 72 }}>
                     <Image
                       width={120}
                       height={120}
@@ -132,7 +131,6 @@ export const getStaticProps: GetStaticProps = async () => {
       durationAsString: convertDurationToTimeString(
         Number(episode.file.duration)
       ),
-      description: episode.description,
       url: episode.file.url,
     };
   });
