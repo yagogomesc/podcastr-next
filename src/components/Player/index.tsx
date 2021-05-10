@@ -48,7 +48,7 @@ export function Player() {
             objectFit="cover"
           />
           <strong>{episode.title}</strong>
-          <p>{episode.members}</p>
+          <span>{episode.members}</span>
         </div>
       ) : (
         <div className={styles.emptyPlayer}>
