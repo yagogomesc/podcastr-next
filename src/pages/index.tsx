@@ -132,30 +132,33 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
 
 // SSG
 export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await api.get("episodes", {
-    params: { _limit: 12, _sort: "published_at", _order: "desc" },
+  const { data } = await api.get(`44LqXAbXkTSvaZxAFTJdIn/episodes`, {
+    headers: {
+      Authorization:
+        "Bearer BQAOn91b9jwrjcK7ZWFi76PxzcEa02Fj05LD0Doh5vCmuRa_b3Kh9kvSLHwf00NxSwsDqGLEv55KsP8lPXsUVEz5Ht_MtugepKpuhAj0wbiUAxhA0SybJbXkdl8kl9KBdp9OIfkbjLjzZVIlSA",
+    },
   });
 
-  const episodes = data.map((episode) => {
+  const episodes = data.items.map((episode) => {
     return {
       id: episode.id,
-      title: episode.title,
-      thumbnail: episode.thumbnail,
-      members: episode.members,
-      publishedAt: format(parseISO(episode.published_at), "d MMM yy", {
+      title: episode.name,
+      thumbnail: episode.images[0].url,
+      members: "thugkjj e Faeddin",
+      publishedAt: format(parseISO(episode.release_date), "d MMM yy", {
         locale: ptBR,
       }),
-      duration: Number(episode.file.duration),
+      duration: Number(episode.duration_ms),
       durationAsString: convertDurationToTimeString(
-        Number(episode.file.duration)
+        Number(episode.duration_ms)
       ),
-      url: episode.file.url,
+      url: episode.href,
     };
   });
 
   const latestEpisodes = episodes.slice(0, 2);
   const allEpisodes = episodes.slice(2, episodes.length);
-
+  console.log(latestEpisodes);
   return {
     props: {
       latestEpisodes,
