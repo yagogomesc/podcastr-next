@@ -67,15 +67,9 @@ export default function Episode({ episode }: EpisodeProps) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await api.get("episodes", {
-    params: {
-      _limit: 2,
-      _sort: "published_at",
-      _order: "desc",
-    },
-  });
+  const { data } = await api.get("shows/44LqXAbXkTSvaZxAFTJdIn/episodes");
 
-  const paths = data.map((episode) => {
+  const paths = data.items.map((episode) => {
     return {
       params: {
         slug: episode.id,
@@ -91,20 +85,20 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (ctx) => {
   const { slug } = ctx.params;
-  const { data } = await api.get(`/episodes/${slug}`);
+  const { data } = await api.get(`episodes/${slug}`);
 
   const episode = {
     id: data.id,
-    title: data.title,
-    thumbnail: data.thumbnail,
-    members: data.members,
-    publishedAt: format(parseISO(data.published_at), "d MMM yy", {
+    title: data.name,
+    thumbnail: data.images[0].url,
+    members: "Thugkjj, Faeddin e Convidado",
+    publishedAt: format(parseISO(data.release_date), "d MMM yy", {
       locale: ptBR,
     }),
-    duration: Number(data.file.duration),
-    durationAsString: convertDurationToTimeString(Number(data.file.duration)),
-    description: data.description,
-    url: data.file.url,
+    duration: Number(data.duration_ms),
+    durationAsString: convertDurationToTimeString(Number(data.duration_ms)),
+    description: data.html_description,
+    url: data.href,
   };
 
   return {
