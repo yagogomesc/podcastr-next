@@ -3,7 +3,7 @@
   width: 26.5rem;
   height: 100vh;
 
-  background: var(--purple-500);
+  background: linear-gradient(125deg, var(--purple-adsr), var(--pink-adsr));
   color: var(--white);
 
   display: flex;
@@ -57,11 +57,7 @@
   height: 20rem;
   border: 1.5px dashed var(--purple-300);
   border-radius: 1.5rem;
-  background: linear-gradient(
-    143.8deg,
-    rgba(145, 100, 250, 0.8) 0%,
-    rgba(0, 0, 0, 0) 100%
-  );
+  background: linear-gradient(143.8deg, var(--purple-adsr), var(--pink-adsr));
 
   padding: 4rem;
   text-align: center;
