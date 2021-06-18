@@ -132,19 +132,14 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
 
 // SSG
 export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await api.get(`44LqXAbXkTSvaZxAFTJdIn/episodes`, {
-    headers: {
-      Authorization:
-        "Bearer BQAOn91b9jwrjcK7ZWFi76PxzcEa02Fj05LD0Doh5vCmuRa_b3Kh9kvSLHwf00NxSwsDqGLEv55KsP8lPXsUVEz5Ht_MtugepKpuhAj0wbiUAxhA0SybJbXkdl8kl9KBdp9OIfkbjLjzZVIlSA",
-    },
-  });
+  const { data } = await api.get(`shows/44LqXAbXkTSvaZxAFTJdIn/episodes`);
 
   const episodes = data.items.map((episode) => {
     return {
       id: episode.id,
       title: episode.name,
       thumbnail: episode.images[0].url,
-      members: "thugkjj e Faeddin",
+      members: "Thugkjj, Faeddin e Convidado",
       publishedAt: format(parseISO(episode.release_date), "d MMM yy", {
         locale: ptBR,
       }),
@@ -158,7 +153,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   const latestEpisodes = episodes.slice(0, 2);
   const allEpisodes = episodes.slice(2, episodes.length);
-  console.log(latestEpisodes);
+
   return {
     props: {
       latestEpisodes,
