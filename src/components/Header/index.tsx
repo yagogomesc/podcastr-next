@@ -8,9 +8,9 @@ export function Header() {
 
   return (
     <header className={styles.headerContainer}>
-      <img src="/logo.svg" alt="Podcastr" />
+      <img src="/adsr-logo.png" alt="Podcastr" />
 
-      <p>O melhor para você ouvir, sempre</p>
+      <p>Um podcast com conversas sobre Speedrun e muito mais.</p>
 
       <span>{currentDate}</span>
     </header>
